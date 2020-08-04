@@ -1,0 +1,14 @@
+.fondo{
+  background-image: url('../img/mundo_conectado.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  min-width: 100%;
+  min-height: 600px;
+}
+
+.titulo{
+  position: relative;
+  margin: 0 auto;
+}

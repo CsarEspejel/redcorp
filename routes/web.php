@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'homeController@index');
 
 Route::get('/vendedores', 'vendedoresController@index')->name('vendedores.index');
 
-Route::post('/agregarVendedor', 'vendedoresController@addVendedor');
+Route::post('vendedores/agregar', 'vendedoresController@store');

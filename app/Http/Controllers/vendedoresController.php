@@ -11,10 +11,10 @@ class vendedoresController extends Controller
     //
     public function index(){
       $vendedores = Vendedor::all();
-      return view('vendedores.index', ['vendedores'=>$vendedores]);
+      return view('vendedores.index', ['vendedores'=>$vendedores, 'title'=>'Vendedores']);
     }
 
-    public function addVendedor(Request $request){
+    public function store(Request $request){
       $datos = $request->all();
       $nombre = $datos['nombre_vendedor'];
       $apellido = $datos['apellido_vendedor'];
