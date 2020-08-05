@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'homeController@index');
+Route::get('/vendedor', 'vendedoresController@index');
+Route::post('/vendedor/agregar', 'vendedoresController@store');
+Route::post('/vendedor/editar', 'vendedoresController@update');
+Route::get('/vendedor/eliminar/{id}', 'vendedoresController@destroy');
 
-Route::get('/vendedores', 'vendedoresController@index')->name('vendedores.index');
-
-Route::post('vendedores/agregar', 'vendedoresController@store');
+Route::get('cliente/{idVendedor}', 'clientesController@index');

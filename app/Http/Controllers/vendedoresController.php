@@ -30,6 +30,21 @@ class vendedoresController extends Controller
         'foto' => $nombre_foto,
       ]);
       // echo "nombre: $nombre <br /> apellido: $apellido <br /> identificador: $identificador <br /> foto: $foto <br /> $nombre_foto <br />";
-      return redirect()->route('vendedores.index');
+      // return redirect()->route('vendedores.index');
+      return redirect('/vendedor');
+    }
+
+    // public function update(Request $request){
+
+    //   Vendedor::find();
+    // }
+
+    public function destroy($id){
+      // $vendedor = Vendedor::find($id);
+      // $vendedor->delete();
+
+      Vendedor::destroy($id);
+
+      return redirect('/vendedor');
     }
 }
