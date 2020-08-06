@@ -47,4 +47,15 @@ class vendedoresController extends Controller
 
       return redirect('/vendedor');
     }
+
+    public function getVendedorAjax(Request $request){
+      
+      // if(preg_match("/^[0-9]$/", $request->idVendedor)){
+        $respuesta = Vendedor::find($request->idVendedor);
+      // }else{
+        // $respuesta = false;
+      // }
+
+      return response()->json(array('success'=>$respuesta));
+    }
 }

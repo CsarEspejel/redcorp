@@ -105,7 +105,7 @@
         $id = $vendedor->id_vendedor; -->
 
         <div class="carding">
-          <a href="#"><img class="img-card" src="img/{{$vendedor->foto}}" alt=""></a>
+          <a href="{{url("/cliente/$vendedor->id_vendedor")}}"><img class="img-card" src="img/{{$vendedor->foto}}" alt=""></a>
           <div class="contenido">
             <p>{{$vendedor->nombre_vendedor}} {{$vendedor->apellido_vendedor}}</p>
             <div class="mr-auto">

@@ -19,4 +19,6 @@ Route::post('/vendedor/agregar', 'vendedoresController@store');
 Route::post('/vendedor/editar', 'vendedoresController@update');
 Route::get('/vendedor/eliminar/{id}', 'vendedoresController@destroy');
 
+Route::post('/ajax', 'vendedoresController@getVendedorAjax');
+
 Route::get('cliente/{idVendedor}', 'clientesController@index');

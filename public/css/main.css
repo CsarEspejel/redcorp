@@ -1,3 +1,4 @@
+/* Estilos vendedores */
 .carding{
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -23,3 +24,11 @@
   color: #000;
   font-weight: bold;
 }
+/* Fin de estilos vendedores */
+
+/* Estilos clientes */
+th, td{
+  text-align: center !important;
+}
+
+/* Fin de estilos clientes */
