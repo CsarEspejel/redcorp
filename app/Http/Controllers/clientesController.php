@@ -28,4 +28,10 @@ class clientesController extends Controller
         ]);
         return redirect('/cliente/'.$id_vendedor);
     }
+
+    public function destroy($id_cliente, $idVendedor){
+        Cliente::destroy($id_cliente);
+
+        return redirect('/cliente/'.$idVendedor);
+    }
 }

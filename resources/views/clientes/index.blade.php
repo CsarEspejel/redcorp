@@ -66,8 +66,27 @@
                     <td>{{$cliente->razon_social_cliente}}</td>
                     <td><button class="btn btn-success">Ver</button>
                         <button class="btn btn-success">Editar</button>
-                        <button class="btn btn-danger">Eliminar</button></td>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar{{$cliente->id_cliente}}">Eliminar</button></td>
                 </tr>
+
+                <div class="modal fade" id="modalEliminar{{$cliente->id_cliente}}" tabindex="-1" aria-labelledby="eliminarLabel" aria-hidden="true" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Eliminar cliente</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h4>¿Estás seguro de querer eliminar {{$cliente->alias_cliente}}?</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <form action="{{url("/cliente/eliminar/$cliente->id_cliente/$cliente->id_vendedor")}}" method="get">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
                 @endif
             </tbody>

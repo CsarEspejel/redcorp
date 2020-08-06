@@ -23,3 +23,4 @@ Route::post('/ajax', 'vendedoresController@getVendedorAjax');
 
 Route::get('cliente/{idVendedor}', 'clientesController@index');
 Route::post('cliente/agregar', 'clientesController@store');
+Route::get('cliente/eliminar/{id_cliente}/{idVendedor}', 'clientesController@destroy');
