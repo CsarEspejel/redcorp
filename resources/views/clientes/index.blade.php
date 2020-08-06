@@ -15,8 +15,9 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="agregarClienteLabel">Agregar un nuevo cliente</h4>
                 </div>
-                <div class="modal-body">
-                    <form action="{{url('/clientes/agregar')}}" method="post">
+                <form action="{{url('/cliente/agregar')}}" method="post">
+                {{csrf_field()}}
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="razon_social">Razón social</label>
                             <input type="text" class="form-control" name="razon_social" id="razon_social" placeholder="Ingresa la razón social">
@@ -30,8 +31,12 @@
                             <input type="text" class="form-control" name="id_vendedor" id="id_vendedor" value="{{$vendedor}}" hidden>
                             <input type="text" class="form-control" name="nombre_vendedor" id="nombre_vendedor" readonly>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

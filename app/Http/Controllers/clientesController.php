@@ -16,4 +16,16 @@ class clientesController extends Controller
         return view('clientes.index', ['title'=>'Clientes', 'clientes'=>$cliente, 'vendedor'=>$idVendedor]);
     }
 
+    public function store(Request $request){
+        // $datosCliente = $request->all();
+        $razon_social_cliente = $request->razon_social;
+        $alias_cliente = $request->alias;
+        $id_vendedor = $request->id_vendedor;
+        Cliente::create([
+            'razon_social_cliente'=>$razon_social_cliente,
+            'alias_cliente'=>$alias_cliente,
+            'id_vendedor'=>$id_vendedor
+        ]);
+        return redirect('/cliente/'.$id_vendedor);
+    }
 }
