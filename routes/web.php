@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'homeController@index');
-Route::get('/vendedor', 'vendedoresController@index');
-Route::post('/vendedor/agregar', 'vendedoresController@store');
-Route::post('/vendedor/editar', 'vendedoresController@update');
-Route::get('/vendedor/eliminar/{id}', 'vendedoresController@destroy');
-
-Route::post('/ajax', 'vendedoresController@getVendedorAjax');
+Route::get('vendedor', 'vendedoresController@index');
+Route::post('vendedor/agregar', 'vendedoresController@store');
+Route::post('vendedor/editar', 'vendedoresController@update');
+Route::get('vendedor/eliminar/{id}', 'vendedoresController@destroy');
 
 Route::get('cliente/{idVendedor}', 'clientesController@index');
 Route::post('cliente/agregar', 'clientesController@store');
 Route::get('cliente/eliminar/{id_cliente}/{idVendedor}', 'clientesController@destroy');
+Route::post('cliente/ajax', 'vendedoresController@getVendedorAjax');
+
+Route::get('proyecto/{idCliente}', 'proyectosController@index');
+Route::post('proyecto/agregar', 'proyectosController@store');
+Route::post('proyecto/ajax', 'clientesController@getClienteAjax');
+

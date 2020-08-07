@@ -34,4 +34,11 @@ class clientesController extends Controller
 
         return redirect('/cliente/'.$idVendedor);
     }
+
+    public function getClienteAjax(Request $request){
+        $cliente = $request->idCliente;
+        $cliente = Cliente::find($cliente);
+        
+        return response()->json(array('success'=>$cliente));
+    }
 }

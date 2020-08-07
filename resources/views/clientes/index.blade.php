@@ -64,11 +64,45 @@
                     <td>{{$cliente->id_cliente}}</td>
                     <td>{{$cliente->alias_cliente}}</td>
                     <td>{{$cliente->razon_social_cliente}}</td>
-                    <td><button class="btn btn-success">Ver</button>
-                        <button class="btn btn-success">Editar</button>
+                    <td><a class="btn btn-success" href="{{url("/proyecto/$cliente->id_cliente")}}">Ver</a>
+                        <!-- <button class="btn btn-success" data-toggle="modal" data-target="#modalEditar">Editar</button> -->
                         <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar{{$cliente->id_cliente}}">Eliminar</button></td>
                 </tr>
 
+                <!-- Modal para editar cliente -->
+
+                <!-- <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="editarLabel" aria-hidden="true" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar cliente</h4>
+                            </div>
+                            <form action="" method="post">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="id_cliente">ID Cliente</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="razon_social_cliente">Razón social</label>
+                                        <input type="text" class="form-control" name="razon_social_cliente">
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alias_cliente">Alias</label>
+                                        <input type="text" class="form-control">
+                                </div>
+                                <div class="modal-footer">
+                                    s
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Termina modal -->
+
+                <!-- Modal para eliminar  -->
                 <div class="modal fade" id="modalEliminar{{$cliente->id_cliente}}" tabindex="-1" aria-labelledby="eliminarLabel" aria-hidden="true" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -87,6 +121,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Termina modal -->
                 @endforeach
                 @endif
             </tbody>
@@ -102,7 +137,7 @@
 $("#agregarClienteBtn").click(function(){
     var idVendedor = $('#id_vendedor').val();
     $.ajax({
-        url: '/ajax/',
+        url: 'ajax',
         data: {
             '_token': '{{csrf_token()}}',
             'idVendedor': idVendedor
