@@ -24,4 +24,10 @@ class proyectosController extends Controller
 
         return redirect('/proyecto/'.$request->id_cliente);
     }
+
+    public function destroy($idProyecto, $idCliente){
+        Proyecto::destroy($idProyecto);
+
+        return redirect('/proyecto/'.$idCliente);
+    }
 }

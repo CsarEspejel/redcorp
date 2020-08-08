@@ -26,5 +26,6 @@ Route::post('cliente/ajax', 'vendedoresController@getVendedorAjax');
 
 Route::get('proyecto/{idCliente}', 'proyectosController@index');
 Route::post('proyecto/agregar', 'proyectosController@store');
+Route::get('proyecto/eliminar/{idProyecto}/{idCliente}', 'proyectosController@destroy');
 Route::post('proyecto/ajax', 'clientesController@getClienteAjax');
 

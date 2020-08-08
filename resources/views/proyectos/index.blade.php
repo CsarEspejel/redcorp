@@ -61,7 +61,7 @@
                     <td>{{$proy->id_proyecto}}</td>
                     <td>{{$proy->nombre_proyecto}}</td>
                     <td><button class="btn btn-secondary">Editar</button>
-                        <a class="btn btn-danger" href="#">Eliminar</a></td>
+                        <a class="btn btn-danger" href="{{url("/proyecto/eliminar/$proy->id_proyecto/$idCliente")}}">Eliminar</a></td>
                 </tr>
                 @endforeach
                 @endif
