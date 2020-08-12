@@ -18,7 +18,9 @@ Route::get('vendedor', 'vendedoresController@index');
 Route::post('vendedor/agregar', 'vendedoresController@store');
 Route::post('vendedor/editar', 'vendedoresController@update');
 Route::get('vendedor/eliminar/{id}', 'vendedoresController@destroy');
+Route::get('vendedor/getVendedor', 'vendedoresController@getListaVendedoresAjax');
 
+Route::get('cliente/getCliente', 'clientesController@getListaClientesAjax');
 Route::get('cliente/{idVendedor}', 'clientesController@index');
 Route::post('cliente/agregar', 'clientesController@store');
 Route::get('cliente/eliminar/{id_cliente}/{idVendedor}', 'clientesController@destroy');

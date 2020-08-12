@@ -58,4 +58,10 @@ class vendedoresController extends Controller
 
       return response()->json(array('success'=>$respuesta));
     }
+
+    public function getListaVendedoresAjax(){
+      $vendedores = Vendedor::all();
+
+      return response()->json(array('success'=>$vendedores));
+    }
 }
