@@ -47,7 +47,7 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">id_cliente</th>
+                    <th scope="col">RFC</th>
                     <th scope="col">Alias</th>
                     <th scope="col">Razón social</th>
                     <th><button type="button" class="btn btn-primary btn-sm" id="agregarClienteBtn" data-toggle="modal" data-target="#modalAgregar">Agregar nuevo</button></th>
@@ -61,7 +61,7 @@
                 @else
                 @foreach($clientes as $cliente)
                 <tr>
-                    <td>{{$cliente->id_cliente}}</td>
+                    <td>{{$cliente->RFC}}</td>
                     <td>{{$cliente->alias_cliente}}</td>
                     <td>{{$cliente->razon_social_cliente}}</td>
                     <td><a class="btn btn-success" href="{{url("/proyecto/$cliente->id_cliente")}}">Ver</a>

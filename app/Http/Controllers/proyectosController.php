@@ -16,6 +16,21 @@ class proyectosController extends Controller
         return view('proyectos.index', ['title'=>'Proyectos', 'proyectos'=>$proyecto, 'idCliente'=>$idCliente]);
     }
 
+    public function show($id_proyecto){
+        // $detalle_proyecto = DB::table('compras')->where('id_proyecto_fk', $id_proyecto);
+        // $detalle_proyecto = Compra::select('*')->where('id_proyecto_fk', '=', $id_proyecto);
+        $detalle_proyecto = Proyecto::select('*')
+        ->join('ordenes_de_compra', 'proyectos.id_proyecto', '=', 'ordenes_de_compra.id_proyecto')
+        ->join('proveedores', 'proveedores.id_proveedor', '=', 'ordenes_de_compra.id_proveedor')
+        ->leftjoin('viaticos', 'proyectos.id_proyecto', '=', 'viaticos.id_proyecto')
+        ->leftjoin('manos_de_obra', 'proyectos.id_proyecto', '=', 'manos_de_obra.id_proyecto')
+        ->where('proyectos.id_proyecto', '=', $id_proyecto)
+        ->get();
+        
+        return response()->json(array('response'=>$detalle_proyecto));
+        // return view('proyectos.detalle', ['title'=>'Detalle Cliente', 'detalles'=>$detalle_proyecto, 'id_proyecto'=>$id_proyecto]);
+    }
+
     public function store(Request $request){
         Proyecto::create([
             'nombre_proyecto'=>$request->nombre_proyecto,

@@ -30,4 +30,12 @@ Route::get('proyecto/{idCliente}', 'proyectosController@index');
 Route::post('proyecto/agregar', 'proyectosController@store');
 Route::get('proyecto/eliminar/{idProyecto}/{idCliente}', 'proyectosController@destroy');
 Route::post('proyecto/ajax', 'clientesController@getClienteAjax');
+Route::get('proyecto/detalle/{id_proyecto}', 'proyectosController@show');
 
+Route::get('proveedor/getProveedor', 'proveedoresController@getListaProveedoresAjax');
+
+Route::post('orden/agregar', 'ordenesCompraController@store')->name('orden.store');
+
+Route::post('viatico/agregar', 'viaticosController@store')->name('viatico.store');
+
+Route::post('obra/agregar', 'manosObraController@store')->name('obra.store');
