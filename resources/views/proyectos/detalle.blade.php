@@ -14,18 +14,74 @@
     </div>
     <div class="row">
         <table class="table">
-            <thead>
-                <th>asdasd</th>
-                <th>asdasd</th>
-                <th>asdasd</th>
-                <th>asdasd</th>
-            </thead>
             <tbody>
-                @foreach($detalles as $detalle)
-                <tr>
-                    <td>{{$detalle->folio_orden_compra}}</td>
+                <tr style="text-align: center; font-weight: bold; font-size:35px;">
+                    <td colspan="5">Ordenes de compra</td>
+                </tr>
+                @if(empty($ordenes) || $ordenes == '[]')
+                <tr style="text-align: center; font-weight: bold; font-size:20px;">
+                    <td colspan="5">No existen datos</td>
+                </tr>
+                @else
+                <tr style="text-align: center; font-weight: bold;">
+                    <td>Folio</td>
+                    <td>Proveedor</td>
+                    <td>Tipo de cambio</td>
+                    <td>Precio en tipo de cambio</td>
+                    <td>Precio en MXN</td>
+                </tr>
+                @foreach($ordenes as $orden)
+                <tr style="text-align: center;">
+                    <td>{{$orden->folio_orden_compra}}</td>
+                    <td>{{$orden->nombre_proveedor}}</td>
+                    <td>{{$orden->moneda_de_cambio}}</td>
+                    <td>{{$orden->precio_cambio}}</td>
+                    <td>{{$orden->precio_mxn}}</td>
                 </tr>
                 @endforeach
+                @endif
+
+                <tr style="text-align: center; font-weight: bold; font-size:35px;">
+                    <td colspan="5">Manos de obra</td>
+                </tr>
+                @if(empty($manos) || $manos == '[]')
+                <tr style="text-align: center; font-weight: bold; font-size:20px;">
+                    <td colspan="5">No existen datos</td>
+                </tr>
+                @else
+                <tr style="text-align: center; font-weight: bold;">
+                    <td colspan="3">Nombre de trabajador</td>
+                    <td colspan="2">Costo de la mano de obra</td>
+                </tr>
+                @foreach($manos as $mano)
+                <tr style="text-align: center;">
+                    <td colspan="3">{{$mano->nombre_trabajador}}</td>
+                    <td colspan="2">{{$mano->costo_obra}}</td>
+                </tr>
+                @endforeach
+                @endif
+
+                <tr style="text-align: center; font-weight: bold; font-size:30px;">
+                    <td colspan="5">Viáticos</td>
+                </tr>
+                @if(empty($viaticos) || $viaticos == '[]')
+                <tr style="text-align: center; font-weight: bold; font-size:20px;">
+                    <td colspan="5">No existen datos</td>
+                </tr>
+                @else
+                <tr style="text-align: center; font-weight: bold;">
+                    <td colspan="2">Tipo de viático</td>
+                    <td>Fecha de uso</td>
+                    <td colspan="2">Costo</td>
+                </tr>
+                @foreach($viaticos as $viatico)
+                <tr style="text-align: center;">
+                    <td colspan="2">{{$viatico->tipo_viatico}}</td>
+                    <td>{{$viatico->fecha_viatico}}</td>
+                    <td colspan="2">{{$viatico->costo_viatico}}</td>
+                </tr>
+                @endforeach
+                @endif
             </tbody>
         </table>
     </div>
@@ -159,6 +215,8 @@
 
 <script>
     $(document).ready(function() {
+        $('#precio_cambio_lbl').attr('hidden', true);
+        $('#precio_cambio').attr('hidden', true);
         var proveedor = $('#id_proveedor');
         $.ajax({
             url: '{{url("/proveedor/getProveedor")}}',
@@ -176,7 +234,7 @@
     });
 
     $('#moneda_de_cambio').change(function() {
-        if ($('#moneda_de_cambio').val() == "MXN") {
+        if ($('#moneda_de_cambio').val() == "MXN" || $('#moneda_de_cambio').val() == 0) {
             $('#precio_cambio_lbl').attr('hidden', true);
             $('#precio_cambio').attr('hidden', true);
             $('#precio_cambio').val(0);

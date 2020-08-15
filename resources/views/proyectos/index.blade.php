@@ -75,10 +75,10 @@
 @section('scripts')
 
 <script>
-    $("#agregarProyectoBtn").click(function() {
+    $(document).ready(function() {
         var idCliente = $('#id_cliente').val();
         $.ajax({
-            url: '/proyecto/ajax',
+            url: '{{url("/proyecto/ajax")}}',
             data: {
                 '_token': '{{csrf_token()}}',
                 'idCliente': idCliente

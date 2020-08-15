@@ -10,4 +10,8 @@ class Mano_de_obra extends Model
     protected $table = "manos_de_obra";
     public $timestamps = false;
     protected $primaryKey = "id_mano_de_obra";
+
+    public function proyecto(){
+        return $this->belongsTo(Proyecto::class, 'id_proyecto');
+    }
 }

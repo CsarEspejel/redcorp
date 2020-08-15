@@ -10,4 +10,8 @@ class Viatico extends Model
     protected $table = "viaticos";
     public $timestamps = false;
     protected $primaryKey = "id_viatico";
+
+    public function proyecto(){
+        return $this->belongsTo(Proyecto::class, 'id_proyecto');
+    }
 }

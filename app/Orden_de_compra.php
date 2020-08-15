@@ -10,4 +10,12 @@ class Orden_de_compra extends Model
     protected $table = "ordenes_de_compra";
     public $timestamps = false;
     protected $primaryKey = "id_orden_compra";
+
+    public function proyecto(){
+        return $this->belongsTo(Proyecto::class, 'id_proyecto');
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_proveedor');
+    }
 }
