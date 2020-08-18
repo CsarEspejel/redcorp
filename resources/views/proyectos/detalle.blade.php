@@ -27,7 +27,7 @@
                     <td>Folio</td>
                     <td>Proveedor</td>
                     <td>Tipo de cambio</td>
-                    <td>Precio en tipo de cambio</td>
+                    <td>Precio de cambio</td>
                     <td>Precio en MXN</td>
                 </tr>
                 @foreach($ordenes as $orden)
@@ -35,8 +35,30 @@
                     <td>{{$orden->folio_orden_compra}}</td>
                     <td>{{$orden->nombre_proveedor}}</td>
                     <td>{{$orden->moneda_de_cambio}}</td>
-                    <td>{{$orden->precio_cambio}}</td>
-                    <td>{{$orden->precio_mxn}}</td>
+                    <td>${{$orden->precio_cambio}}</td>
+                    <td>${{$orden->precio_mxn}}</td>
+                </tr>
+                @endforeach
+                @endif
+
+                <tr style="text-align: center; font-weight: bold; font-size:30px;">
+                    <td colspan="5">Viáticos</td>
+                </tr>
+                @if(empty($viaticos) || $viaticos == '[]')
+                <tr style="text-align: center; font-weight: bold; font-size:20px;">
+                    <td colspan="5">No existen datos</td>
+                </tr>
+                @else
+                <tr style="text-align: center; font-weight: bold;">
+                    <td colspan="2">Tipo de viático</td>
+                    <td>Fecha de uso</td>
+                    <td colspan="2">Costo de viático</td>
+                </tr>
+                @foreach($viaticos as $viatico)
+                <tr style="text-align: center;">
+                    <td colspan="2">{{$viatico->tipo_viatico}}</td>
+                    <td>{{$viatico->fecha_viatico}}</td>
+                    <td colspan="2">${{$viatico->costo_viatico}}</td>
                 </tr>
                 @endforeach
                 @endif
@@ -56,29 +78,7 @@
                 @foreach($manos as $mano)
                 <tr style="text-align: center;">
                     <td colspan="3">{{$mano->nombre_trabajador}}</td>
-                    <td colspan="2">{{$mano->costo_obra}}</td>
-                </tr>
-                @endforeach
-                @endif
-
-                <tr style="text-align: center; font-weight: bold; font-size:30px;">
-                    <td colspan="5">Viáticos</td>
-                </tr>
-                @if(empty($viaticos) || $viaticos == '[]')
-                <tr style="text-align: center; font-weight: bold; font-size:20px;">
-                    <td colspan="5">No existen datos</td>
-                </tr>
-                @else
-                <tr style="text-align: center; font-weight: bold;">
-                    <td colspan="2">Tipo de viático</td>
-                    <td>Fecha de uso</td>
-                    <td colspan="2">Costo</td>
-                </tr>
-                @foreach($viaticos as $viatico)
-                <tr style="text-align: center;">
-                    <td colspan="2">{{$viatico->tipo_viatico}}</td>
-                    <td>{{$viatico->fecha_viatico}}</td>
-                    <td colspan="2">{{$viatico->costo_viatico}}</td>
+                    <td colspan="2">${{$mano->costo_obra}}</td>
                 </tr>
                 @endforeach
                 @endif
@@ -112,7 +112,7 @@
                     <div class="form-group">
                         <label for="moneda_de_cambio">Tipo de cambio:</label>
                         <select class="form-control" name="moneda_de_cambio" id="moneda_de_cambio">
-                            <option value="0">Selecciona uno</option>
+                            <option value="NULL">Selecciona uno</option>
                             <option value="USDB">USD Bancomer</option>
                             <option value="USDF">USD Federación</option>
                             <option value="MXN">MXN</option>
@@ -120,18 +120,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="precio_cambio" id="precio_cambio_lbl">Precio en moneda de cambio:</label>
+                        <label for="precio_cambio" id="precio_cambio_lbl">Precio de cambio:</label>
                         <input type="text" name="precio_cambio" id="precio_cambio" class="form-control" placeholder="">
                     </div>
 
                     <div class="form-group">
-                        <label for="precio_mxn">Precio en MXN:</label>
-                        <input type="text" name="precio_mxn" id="precio_mxn" class="form-control" placeholder="MXN">
+                        <label for="precio">Precio en MXN:</label>
+                        <input type="text" name="precio" id="precio" class="form-control" placeholder="MXN">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Guardar</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -154,10 +154,10 @@
                         <label for="tipo_viatico">Tipo de viático</label>
                         <select class="form-control" name="tipo_viatico" id="tipo_viatico">
                             <option value="0">Selecciona una opción</option>
-                            <option value="hospedaje">Hospedaje</option>
-                            <option value="comida">Comida</option>
-                            <option value="gasolina">Gasolina</option>
-                            <option value="otro">Otro</option>
+                            <option value="Hospedaje">Hospedaje</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Gasolina">Gasolina</option>
+                            <option value="Otro">Otro</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -170,8 +170,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Guardar</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -200,8 +200,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Agregar</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -234,10 +234,10 @@
     });
 
     $('#moneda_de_cambio').change(function() {
-        if ($('#moneda_de_cambio').val() == "MXN" || $('#moneda_de_cambio').val() == 0) {
+        if ($('#moneda_de_cambio').val() == "MXN" || $('#moneda_de_cambio').val() == "NULL") {
             $('#precio_cambio_lbl').attr('hidden', true);
             $('#precio_cambio').attr('hidden', true);
-            $('#precio_cambio').val(0);
+            $('#precio_cambio').val(1);
         } else {
             $('#precio_cambio_lbl').attr('hidden', false);
             $('#precio_cambio').attr('hidden', false);
