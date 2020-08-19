@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Proyecto;
+use App\Factura;
 use App\Orden_de_compra;
 
 class proyectosController extends Controller
@@ -17,7 +18,7 @@ class proyectosController extends Controller
         return view('proyectos.index', ['title'=>'Proyectos', 'proyectos'=>$proyecto, 'idCliente'=>$idCliente]);
     }
 
-    public function show($id_proyecto){
+    public function showDetail($id_proyecto){
         $datosOrdenes = Orden_de_compra::select('*')
         ->join('proveedores', 'proveedores.id_proveedor', '=', 'ordenes_de_compra.id_proveedor')
         ->where('ordenes_de_compra.id_proyecto', '=', $id_proyecto)
@@ -26,7 +27,13 @@ class proyectosController extends Controller
         $datosManos = $datosProyecto->manosObra;
         $datosViaticos = $datosProyecto->viaticos;
         // return response()->json(array('ordenes'=>$datosOrdenes, 'manos'=>$datosManos, 'viaticos'=>$datosViaticos));
-        return view('proyectos.detalle', ['title'=>'Detalle Cliente', 'ordenes'=>$datosOrdenes, 'manos'=>$datosManos, 'viaticos'=>$datosViaticos, 'id_proyecto'=>$id_proyecto]);
+        return view('proyectos.detalleProyecto', ['title'=>'Detalle Proyecto', 'ordenes'=>$datosOrdenes, 'manos'=>$datosManos, 'viaticos'=>$datosViaticos, 'id_proyecto'=>$id_proyecto]);
+    }
+
+    public function showFactura($id_proyecto){
+        $datosFactura = Factura::all();
+
+        return view('proyectos.detalleFactura', ['title'=>'Detalle Factura', 'facturas'=>$datosFactura, 'id_proyecto'=>$id_proyecto]);
     }
 
     public function store(Request $request){

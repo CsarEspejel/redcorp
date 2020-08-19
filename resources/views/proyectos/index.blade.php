@@ -60,7 +60,8 @@
                 <tr>
                     <td>{{$proy->id_proyecto}}</td>
                     <td>{{$proy->nombre_proyecto}}</td>
-                    <td><a class="btn btn-primary" href="{{url("/proyecto/detalle/$proy->id_proyecto")}}">Ver detalles</a>
+                    <td><a class="btn btn-primary" href="{{url("/proyecto/detalleProyecto/$proy->id_proyecto")}}">Detalles</a>
+                        <a class="btn btn-primary" href="{{url("/proyecto/detalleFactura/$proy->id_proyecto")}}">Factura</a>
                         <button class="btn btn-secondary">Editar</button>
                         <a class="btn btn-danger" href="{{url("/proyecto/eliminar/$proy->id_proyecto/$idCliente")}}">Eliminar</a></td>
                 </tr>

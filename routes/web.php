@@ -26,16 +26,16 @@ Route::post('cliente/agregar', 'clientesController@store');
 Route::get('cliente/eliminar/{id_cliente}/{idVendedor}', 'clientesController@destroy');
 Route::post('cliente/ajax', 'vendedoresController@getVendedorAjax');
 
+Route::post('proyecto/ajax', 'clientesController@getClienteAjax');
 Route::get('proyecto/{idCliente}', 'proyectosController@index');
 Route::post('proyecto/agregar', 'proyectosController@store');
 Route::get('proyecto/eliminar/{idProyecto}/{idCliente}', 'proyectosController@destroy');
-Route::post('proyecto/ajax', 'clientesController@getClienteAjax');
-Route::get('proyecto/detalle/{id_proyecto}', 'proyectosController@show');
+Route::get('proyecto/detalleProyecto/{id_proyecto}', 'proyectosController@showDetail');
+Route::get('proyecto/detalleFactura/{id_proyecto}', 'proyectosController@showFactura');
 
 Route::get('proveedor/getProveedor', 'proveedoresController@getListaProveedoresAjax');
 
 Route::post('orden/agregar', 'ordenesCompraController@store')->name('orden.store');
-
 Route::post('viatico/agregar', 'viaticosController@store')->name('viatico.store');
-
 Route::post('obra/agregar', 'manosObraController@store')->name('obra.store');
+Route::post('factura/agregar', 'facturasController@store')->name('factura.store');
