@@ -31,7 +31,8 @@ class proyectosController extends Controller
     }
 
     public function showFactura($id_proyecto){
-        $datosFactura = Factura::all();
+        $datosFactura = Factura::all()
+        ->where('id_proyecto', '=', $id_proyecto);
 
         return view('proyectos.detalleFactura', ['title'=>'Detalle Factura', 'facturas'=>$datosFactura, 'id_proyecto'=>$id_proyecto]);
     }

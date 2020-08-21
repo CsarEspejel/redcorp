@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\facturasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +39,6 @@ Route::get('proveedor/getProveedor', 'proveedoresController@getListaProveedoresA
 Route::post('orden/agregar', 'ordenesCompraController@store')->name('orden.store');
 Route::post('viatico/agregar', 'viaticosController@store')->name('viatico.store');
 Route::post('obra/agregar', 'manosObraController@store')->name('obra.store');
+
 Route::post('factura/agregar', 'facturasController@store')->name('factura.store');
+Route::post('factura/actualizarStatus', 'facturasController@updateStatus')->name('fact.statUpdt');

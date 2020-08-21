@@ -38,7 +38,13 @@
                     <td>{{$factura->tipo_documento}}</td>
                     <td>{{$factura->fecha_emision}}</td>
                     <td>${{$factura->monto}}</td>
-                    <td>{{$factura->estatus}}</td>
+                    <td><select class="form-control" name="status" id="status{{$factura->id_factura}}" onchange="change('status{{$factura->id_factura}}', '{{$factura->id_factura}}');" required>
+                            <option value="" selected>{{$factura->estatus}}</option>
+                            <option value="Cobrado">Cobrado</option>
+                            <option value="Por cobrar">Por cobrar</option>
+                            <option value="Vigente">Vigente</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select></td>
                 </tr>
                 @endforeach
                 @endif
@@ -87,12 +93,12 @@
                     </div>
                     <div class="form-group">
                         <label for="estatus">Estatus</label>
-                        <select name="estatus" id="estatus" class="form-control">
-                            <option value="0" selected>Selecciona una opción</option>
-                            <option value="1">Cobrado</option>
-                            <option value="2">Por cobrar</option>
-                            <option value="3">Vigente</option>
-                            <option value="4">Cancelado</option>
+                        <select name="estatus" id="estatus" class="form-control" required>
+                            <option value="" selected>Selecciona una opción</option>
+                            <option value="Cobrado">Cobrado</option>
+                            <option value="Por cobrar">Por cobrar</option>
+                            <option value="Vigente">Vigente</option>
+                            <option value="Cancelado">Cancelado</option>
                         </select>
                     </div>
                 </div>
@@ -111,40 +117,62 @@
 @section('scripts')
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         var razon = $("#razon_social");
         $.ajax({
             url: '{{url("cliente/getCliente")}}',
             type: 'get',
-            success: function(r){
-                r.success.forEach(function(element){
-                    razon.append("<option value="+element.id_cliente+">"+element.razon_social_cliente+"</option>");
+            success: function(r) {
+                r.success.forEach(function(element) {
+                    razon.append("<option value=" + element.id_cliente + ">" + element.razon_social_cliente + "</option>");
                 });
             },
-            error: function(xhr, error){
-                console.log("error: "+error);
+            error: function(xhr, error) {
+                console.log("error: " + error);
             }
         });
     });
 
     var idCliente = "";
     var razon = $("#razon_social");
-    razon.change(function(){
+    razon.change(function() {
         idCliente = razon.val();
         $.ajax({
             url: '{{url("proyecto/ajax")}}',
             type: 'post',
-            data: {'_token': "{{csrf_token()}}",'idCliente': idCliente},
-            success: function(r){
+            data: {
+                '_token': "{{csrf_token()}}",
+                'idCliente': idCliente
+            },
+            success: function(r) {
                 console.log(r.success.RFC);
                 $("#rfc").val(r.success.RFC);
                 $("#razon_social_value").val(r.success.razon_social_cliente);
             },
-            error: function(xhr, error){
-                console.log("error: "+xhr.message);
+            error: function(xhr, error) {
+                console.log("error: " + xhr.message);
             }
         });
     });
+
+    function change(id_select_status, id_factura){
+        var estatus = $('#'+id_select_status);
+        $.ajax({
+            url: '{{route("fact.statUpdt")}}',
+            type: 'post',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'id_factura': id_factura,
+                'status': estatus.val()
+            },
+            success: function(r) {
+                alert('Se ha cambiado el status a '+estatus.val());
+            },
+            error: function(xhr, error) {
+                alert('Ha ocurrido un error al cambiar el estatus, actualiza la página e intenta de nuevo');
+            }
+        });
+    }
 </script>
 
 @endsection

@@ -21,4 +21,12 @@ class facturasController extends Controller
         // return response()->json($request->all());
         return redirect('proyecto/detalleFactura/'.$request->id_proyecto);
     }
+
+    public function updateStatus(Request $request){
+        $factura = Factura::find($request->id_factura);
+        $factura->estatus = $request->status;
+        $factura->save();
+
+        return response()->json(['success'=>'Guardado']);
+    }
 }
