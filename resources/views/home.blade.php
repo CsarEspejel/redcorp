@@ -1,6 +1,6 @@
 @extends('layouts.head')
 @section('estilos')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/vendor/css/home.css') }}">
 @section('content')
 
 <!-- Barra de navegación -->
@@ -10,11 +10,10 @@
 </nav>
 <!-- Termina barra de navegación -->
 
-<div class="container-fluid fondo">
-  <div class="container">
-    <div class="titulo">
-      <h3 class="h3">Redcorp</h3>
-    </div>
+<div class="contenedor">
+  <div class="showcase">
+    <p>Sistema de facturación y control de proyectos</p>
+    <a class="btn btn-danger" href="{{url('vendedor/')}}">Ver vendedores</a>
   </div>
 </div>
 

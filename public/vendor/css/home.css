@@ -1,0 +1,34 @@
+.contenedor{
+  height: fit-content;
+}
+
+.showcase{
+  background: url('../../img/mundo_conectado.jpg') no-repeat center center/cover;
+  width: 100%;
+  height: 91%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.showcase::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.showcase p{
+  color: #fff;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 35px;
+  position: relative;
+}
+
+.showcase a{
+  position: relative;
+}
